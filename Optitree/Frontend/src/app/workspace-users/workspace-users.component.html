@@ -1,0 +1,31 @@
+<a [routerLink]="['/workspaces']">Takaisin työtilat sivulle</a>
+<h1>Työtilan {{workspace.workspacename}} opiskelijoiden hallinta</h1>
+<h2>Työtilassa opiskelijana olevat käyttäjät</h2>
+<table *ngIf="!empty">
+    <th>Käyttäjänimi</th>
+    <th>Etunimi</th>
+    <th>Sukunimi</th>
+    <th>Poista</th>
+    <tr *ngFor="let wsUser of wsUsers">
+        <td>{{wsUser.username}}</td>
+        <td>{{wsUser.firstname}}</td>
+        <td>{{wsUser.lastname}}</td>
+        <td><input type="checkbox" name="{{wsUser.userID}}" (change)="checkValueRemove($event)"></td>
+    </tr>
+</table>
+<button *ngIf="!empty" (click)="removeUsers()">Poista valitut käyttäjät työtilasta</button>
+<p *ngIf="empty">Työtilassa ei ole opiskelijoita!</p>
+<h2>Käyttäjät jotka eivät ole vielä työtilassa</h2>
+<table>
+    <th>Käyttäjänimi</th>
+    <th>Etunimi</th>
+    <th>Sukunimi</th>
+    <th>Lisää</th>
+    <tr *ngFor="let user of users">
+        <td>{{user.username}}</td>
+        <td>{{user.firstname}}</td>
+        <td>{{user.lastname}}</td>
+        <td><input type="checkbox" name="{{user.userID}}" (change)="checkValueAdd($event)"></td>
+    </tr>
+</table>
+<button (click)="addUsers()">Lisää valitut käyttäjät työtilaan</button>

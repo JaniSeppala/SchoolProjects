@@ -1,0 +1,20 @@
+<a [routerLink]="['/dashboard']">Palaa työpöydälle</a><br><br>
+<a [routerLink]="['/adduser']"><button>LUO UUSI KÄYTTÄJÄ</button></a>
+<table>
+    <tr>
+        <th>Käyttäjänimi</th>
+        <th>Etunimi</th>
+        <th>Sukunimi</th>
+        <th>Tilin tyyppi</th>
+        <th>Toiminnot</th>
+    </tr>
+    <tr *ngFor="let user of users">
+        <td>{{user.username}}</td>
+        <td>{{user.firstname}}</td>
+        <td>{{user.lastname}}</td>
+        <td *ngIf="user.administrator">PÄÄKÄYTTÄJÄ</td>
+        <td *ngIf="!user.administrator && user.teacher">OPETTAJA</td>
+        <td *ngIf="!user.administrator && !user.teacher">OPPILAS</td>
+        <td><a [routerLink]="['/edituser', user.username]"><button>MUOKKAA</button></a><button (click)="onDelete(user.username)">POISTA</button></td>
+    </tr>
+</table>

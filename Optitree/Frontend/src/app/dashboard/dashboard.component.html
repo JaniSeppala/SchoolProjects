@@ -1,0 +1,13 @@
+<div>
+    <h1>Tervetuloa takaisin {{user.firstname}}!</h1>
+    <p>Sivupaneelissa näet kaikki työtilat, joissa olet opiskelijana. Klikkaa työtilan nimeä avataksesi listan työtilassa olevista sivuista.</p>
+</div>
+<div *ngIf="user.teacher">
+    <h2>Opettajan hallintapaneeli</h2>
+    <a [routerLink]="['/workspaces']">Työtilojen hallinta</a>
+</div>
+<div *ngIf="user.administrator">
+    <h2>Pääkäyttäjän hallintapaneeli</h2>
+    <a [routerLink]="['/users']">Käyttäjien hallinta</a><br>
+    <a [routerLink]="['/workspaces']">Työtilojen hallinta</a>
+</div>

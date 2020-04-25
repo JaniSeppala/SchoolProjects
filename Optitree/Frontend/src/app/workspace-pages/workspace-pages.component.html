@@ -1,0 +1,20 @@
+<a [routerLink]="['/workspaces']">Takaisin työtilat sivulle</a>
+<h1>{{workspace.workspacename}} työtilan sivut:</h1>
+<a [routerLink]="['/addpage', workspace.workspacename]"><button>LUO UUSI SIVU</button></a>
+<table>
+    <tr>
+        <th>Sivun nimi</th>
+        <th>Näkyvyys</th>
+        <th>Toiminnot</th>
+    </tr>
+    <tr *ngFor="let page of pages">
+        <td>{{page.pageName}}</td>
+        <td *ngIf="page.visible">NÄKYVISSÄ</td>
+        <td *ngIf="!page.visible">PIILOTETTU</td>
+        <td>
+            <a [routerLink]="['/editpage', workspace.workspacename, page.pageID]"><button>MUOKKAA SIVUA</button></a>
+            <button (click)="onDelete(page.pageID)">POISTA SIVU</button>
+            <a [routerLink]="['/workspaces', workspace.workspacename, page.pageID]"><button>NÄYTÄ SIVU</button></a>
+        </td>
+    </tr>
+</table>

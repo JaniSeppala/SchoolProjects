@@ -1,0 +1,42 @@
+<a [routerLink]="['/users']">Takaisin käyttäjät sivulle</a>
+<h1>Luo uusi käyttäjä</h1>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
+    <div>
+        <label for="username">
+            Käyttäjänimi:
+        </label><br>
+        <input id="username" type="text" formControlName="username" required (focusout)="checkUsernameAvailability(userForm.value.username)" autofocus>
+        <span *ngIf="unavailable">Käyttäjänimi on jo käytössä!</span>
+    </div>
+    <div>
+        <label for="pswd">
+            Salasana:
+        </label><br>
+        <input id="pswd" type="password" formControlName="pswd" required>
+    </div>
+    <div>
+        <label for="firstname">
+            Etunimi:
+        </label><br>
+        <input id="firstname" type="text" formControlName="firstname" required>
+    </div>
+    <div>
+        <label for="lastname">
+            Sukunimi:
+        </label><br>
+        <input id="lastname" type="text" formControlName="lastname" required>
+    </div>
+    <div>
+        <label for="teacher">
+            Opettaja:
+        </label>
+        <input type="checkbox" name="teacher" formControlName="teacher">
+    </div>
+    <div>
+        <label for="administrator">
+            Pääkäyttäjä:
+        </label>
+        <input type="checkbox" name="administrator" formControlName="administrator">
+    </div>
+    <button class="button" type="submit" [disabled]="!userForm.valid || unavailable">Luo käyttäjä</button>
+</form>

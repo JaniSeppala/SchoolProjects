@@ -1,0 +1,11 @@
+<h1>Luo uusi työtila</h1>
+<form [formGroup]="workspaceForm" (ngSubmit)="onSubmit(workspaceForm.value)">
+    <div>
+        <label for="workspacename">
+            Työtilan nimi:
+        </label><br>
+        <input id="workspacename" type="text" formControlName="workspacename" required (input)="checkWorkspacenameAvailability(workspaceForm.value.workspacename)" autofocus>
+        <span *ngIf="unavailable">Nimi on jo käytössä!</span>
+    </div>
+    <button class="button" type="submit" [disabled]="!workspaceForm.valid || unavailable">Luo Työtila</button>
+</form>

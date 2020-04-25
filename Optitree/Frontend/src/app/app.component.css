@@ -1,0 +1,42 @@
+#app {
+    color: white;
+    display: grid;
+    grid-template-columns: 20vmin auto;
+    grid-template-rows: auto auto auto;
+}
+app-header{
+    background-color: navy;
+    grid-column-start: 1;
+    grid-column-end: -1;
+    grid-row-start: 1; 
+    grid-row-end: 2;
+    padding: 1vmin;
+}
+
+app-navigation {
+    background-color: gray;
+    color: navy;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2; 
+    grid-row-end: 3;
+    padding: 1vmin;
+}
+
+#router {
+    color: black;
+    grid-column-start: 2;
+    grid-column-end: -1;
+    grid-row-start: 2; 
+    grid-row-end: 3;
+    padding: 1vmin;
+}
+
+app-footer{
+    background-color: navy;
+    grid-column-start: 1;
+    grid-column-end: -1;
+    grid-row-start: 3; 
+    grid-row-end: 4;
+    padding: 1vmin;
+}

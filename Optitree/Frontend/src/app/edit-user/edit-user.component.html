@@ -1,0 +1,31 @@
+<a [routerLink]="['/users']">Takaisin käyttäjät sivulle</a>
+<h1>Muokkaa käyttäjän {{user.username}} tietoja</h1>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
+    <div>
+        <label for="firstname">
+            Etunimi:
+        </label><br>
+        <input id="firstname" type="text" formControlName="firstname" value="{{user.firstname}}" required autofocus>
+    </div>
+    <div>
+        <label for="lastname">
+            Sukunimi:
+        </label><br>
+        <input id="lastname" type="text" formControlName="lastname" value="{{user.lastname}}" required>
+    </div>
+    <div>
+        <label for="teacher">
+            Opettaja:
+        </label>
+        <input *ngIf="user.teacher" type="checkbox" name="teacher" formControlName="teacher" checked>
+        <input *ngIf="!user.teacher" type="checkbox" name="teacher" formControlName="teacher">
+    </div>
+    <div>
+        <label for="administrator">
+            Pääkäyttäjä:
+        </label>
+        <input *ngIf="user.administrator" type="checkbox" name="administrator" formControlName="administrator" checked>
+        <input *ngIf="!user.administrator" type="checkbox" name="administrator" formControlName="administrator">
+    </div>
+    <button class="button" type="submit" [disabled]="!userForm.valid">Tallenna muutokset</button>
+</form>

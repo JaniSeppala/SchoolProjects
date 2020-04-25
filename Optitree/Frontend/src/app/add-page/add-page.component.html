@@ -1,0 +1,22 @@
+<h1>Luo uusi sivu työtilaan {{workspace.workspacename}}</h1>
+<form [formGroup]="pageForm" (ngSubmit)="onSubmit(pageForm.value)">
+    <div>
+        <label for="pagename">
+            Sivun nimi:
+        </label><br>
+        <input id="pagename" type="text" formControlName="pageName" required>
+    </div>
+    <div>
+        <label for="pagehtml">
+            Sisältö:
+        </label><br>
+        <textarea id="pagehtml" formControlName="pageHTML" required></textarea>
+    </div>
+    <div>
+        <label for="visible">
+            Näkyvissä:
+        </label>
+        <input type="checkbox" id="visible" formControlName="visible">
+    </div>
+    <button class="button" type="submit" [disabled]="!pageForm.valid">Luo sivu</button>
+</form>

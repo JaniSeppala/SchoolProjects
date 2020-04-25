@@ -1,0 +1,17 @@
+<a [routerLink]="['/dashboard']">Palaa työpöydälle</a><br><br>
+<a [routerLink]="['/addworkspace']"><button>LUO UUSI TYÖTILA</button></a>
+<table>
+    <tr>
+        <th>Työtilan nimi</th>
+        <th>Toiminnot</th>
+    </tr>
+    <tr *ngFor="let workspace of workspaces">
+        <td>{{workspace.workspacename}}</td>
+        <td>
+            <a [routerLink]="['/manageusers', workspace.workspacename]"><button>HALLINNOI OPPILAITA</button></a><br>
+            <a [routerLink]="['/manageteachers', workspace.workspacename]"><button>HALLINNOI OPETTAJIA</button></a><br>
+            <a [routerLink]="['/managepages', workspace.workspacename]"><button>HALLINNOI SIVUJA</button></a><br>
+            <button (click)="onDelete(workspace.workspacename)">POISTA TYÖTILA</button>
+        </td>
+    </tr>
+</table>

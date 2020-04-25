@@ -1,0 +1,12 @@
+<a *ngIf="authService.loggedIn" (click)="authService.logout()">Kirjaudu ulos</a><br>
+<a *ngIf="authService.loggedIn" [routerLink]="['/dashboard']">Työpöytä</a><br><br>
+<strong *ngIf="authService.loggedIn">TYÖTILAT</strong>
+<nav *ngFor="let workspace of authService.navlist">
+    <div (click)="toggleVisibility(workspace)">{{workspace.workspacename}}</div>
+    <div *ngIf="workspace.isOpen">
+        <div  *ngFor="let page of workspace.pages">
+            <a *ngIf="page.visible" [routerLink]="['/workspaces', workspace.workspacename, page.pageID]">{{page.pageName}}</a>
+        </div>
+    </div>
+</nav>
+

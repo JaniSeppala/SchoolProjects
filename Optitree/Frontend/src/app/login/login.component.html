@@ -1,0 +1,15 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+    <div>
+        <label for="username">
+            Käyttäjätunnus:
+        </label><br>
+        <input id="username" type="text" formControlName="username" required autofocus>
+    </div>
+    <div>
+        <label for="password">
+            Salasana:
+        </label><br>
+        <input id="password" type="password" formControlName="pswd" required>
+    </div>
+    <button class="button" type="submit" [disabled]="!loginForm.valid">Kirjaudu</button>
+</form>
