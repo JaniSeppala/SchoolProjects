@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4691249260337334462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4691249260337334456}
+  - component: {fileID: 4691249260337334463}
+  m_Layer: 0
+  m_Name: Game Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4691249260337334456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691249260337334462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.881071, y: 0.12064743, z: -7.391018}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4691249260337334463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691249260337334462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54aaf82b3d03c4ab41cbc0fcfeff6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _zombie: {fileID: 664536065, guid: ad0ee46810eb9384a8201435bdf54cf7, type: 3}
+  _zombieSpawnInterval: 3
+  _pistolClipSize: 17
+  _shotgunClipSize: 8
+  _pistolSpareAmmo: 17
+  _shotgunSpareAmmo: 8
+  _ammoCounter: {fileID: 0}
+  _clipAmmoCounter: {fileID: 0}
+  _reloadTimerText: {fileID: 0}
+  _pistolReloadTime: 3
+  _shotgunReloadTime: 5
+  _staminaCount: {fileID: 0}
+  _staminaDrainPerSecond: 5
+  _staminaRegenPerSecond: 5
+  _gameOverText: {fileID: 0}
+  _scoreCount: {fileID: 0}
+  _secondCount: {fileID: 0}
+  _minuteCount: {fileID: 0}
+  PatrolPoints: []
+  Player: {fileID: 0}
+  PlayerMovement: {fileID: 0}
+  GameOver: 0
+  Shooting: 0
+  Reloading: 0
+  PistolEquipped: 0
+  ShotgunEquipped: 0
+  PistolClip: 17
+  ShotgunClip: 8
+  Stamina: 100
