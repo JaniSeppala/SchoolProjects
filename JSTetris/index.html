@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tetris</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="A Tetris Clone made with HTML5 and Javascript!">
+        <meta name="author" content="Jani Seppälä">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                background-color: black;
+            }
+
+            #grid-container {
+                display: grid;
+                background-color: black;
+                color: azure;
+            }
+
+            #playing-field {
+                margin: auto;
+                background-color: black;
+            }
+
+            .grid-item {
+                background-color: brown;
+                text-align: center;
+            }
+
+            #play-area {
+                border-style: solid;
+                border-color: brown;
+                border-width: 0vh 1vh 1vh;
+            }
+
+            #next-tetromino {
+                margin: auto;
+                background-color: black;
+            }
+
+            td {
+                background-color: gray;
+            }
+
+            button {
+                color: white;
+                background-color: brown;
+            }
+
+            #start-menu, #game-over-menu {
+                background-color: brown;
+                margin: 0;
+                position: absolute;
+                top: 30%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            label {
+                margin: 1vh;
+            }
+
+            select {
+                width: 10vh;
+                height: 5vh;
+                font-size: 3.5vh;
+            }
+
+            #start-game {
+                width: 35vh;
+                height: 5vh;
+                font-size: 3.5vh;
+                margin: 1vh;
+            }
+
+            #return-to-main-menu {
+                width: 35vh;
+                height: 5vh;
+                font-size: 2vh;
+                margin: 1vh;
+            }
+
+
+            #new-highscore, #game-over-menu {
+                display: none;
+            }
+
+            @media (min-aspect-ratio: 4/3){
+                #grid-container {
+                    font-size: 3.5vh;
+                    grid-template-columns: 2fr 2fr 3fr 3fr 2fr 2fr;
+                    grid-template-rows: 4fr 1fr;
+                }
+
+                #button-left {
+                    grid-column-start: 1;
+                    grid-column-end: 2;
+                    grid-row-start: 1; 
+                    grid-row-end: 3;
+                }
+
+                #button-right {
+                    grid-column-start: 2;
+                    grid-column-end: 3;
+                    grid-row-start: 1; 
+                    grid-row-end: 3;
+                }
+                #button-drop {
+                    grid-column-start: 5;
+                    grid-column-end: 6;
+                    grid-row-start: 1; 
+                    grid-row-end: 3;
+                }
+                #button-rotate {
+                    grid-column-start: 6;
+                    grid-column-end: 7;
+                    grid-row-start: 1; 
+                    grid-row-end: 3;
+                }
+
+                #playing-field {
+                    grid-column-start: 3;
+                    grid-column-end: 5;
+                    grid-row-start: 1; 
+                    grid-row-end: 2;
+                }
+
+                #next {
+                    margin: 1vh; 
+                    grid-column-start: 3;
+                    grid-column-end: 4;
+                    grid-row-start: 2; 
+                    grid-row-end: 3;
+                }
+
+                #stats {
+                    margin: 1vh; 
+                    grid-column-start: 4;
+                    grid-column-end: 5;
+                    grid-row-start: 2; 
+                    grid-row-end: 3;
+                }
+
+                #play-area {
+                    height: 74vh;
+                    width: 37vh;
+                }
+
+                #next-tetromino {
+                    height: 7.4vh;
+                    width: 14.8vh;
+                }
+
+                button {
+                    margin: 10vh 1vh;
+                }
+            }
+
+            @media (max-aspect-ratio: 4/3) {
+                #grid-container {
+                    font-size: 2.5vh;
+                    grid-template-columns: 1fr 1fr 1fr 1fr;
+                    grid-template-rows: 5fr 1fr 1fr;
+                }
+
+                #button-left {
+                    grid-column-start: 1;
+                    grid-column-end: 2;
+                    grid-row-start: 3; 
+                    grid-row-end: 4;
+                }
+
+                #button-right {
+                    grid-column-start: 2;
+                    grid-column-end: 3;
+                    grid-row-start: 3; 
+                    grid-row-end: 4;
+                }
+                #button-drop {
+                    grid-column-start: 3;
+                    grid-column-end: 4;
+                    grid-row-start: 3; 
+                    grid-row-end: 4;
+                }
+                #button-rotate {
+                    grid-column-start: 4;
+                    grid-column-end: 5;
+                    grid-row-start: 3; 
+                    grid-row-end: 4;
+                }
+
+                #playing-field {
+                    grid-column-start: 1;
+                    grid-column-end: 5;
+                    grid-row-start: 1; 
+                    grid-row-end: 2;
+                }
+
+                #next {
+                    margin: 1vh; 
+                    grid-column-start: 1;
+                    grid-column-end: 3;
+                    grid-row-start: 2; 
+                    grid-row-end: 3;
+                }
+
+                #stats {
+                    margin: 1vh; 
+                    grid-column-start: 3;
+                    grid-column-end: 5;
+                    grid-row-start: 2; 
+                    grid-row-end: 3;
+                }
+
+                button {
+                    margin: 1vh;
+                }
+
+                #play-area {
+                    height: 70vh;
+                    width: 35vh;
+                }
+
+                #next-tetromino {
+                    height: 7vh;
+                    width: 14vh;
+                }
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="grid-container">
+            <div class="grid-item" id="playing-field">
+                <table id="play-area">
+                    <tr>
+                        <td id="00"></td>
+                        <td id="01"></td>
+                        <td id="02"></td>
+                        <td id="03"></td>
+                        <td id="04"></td>
+                        <td id="05"></td>
+                        <td id="06"></td>
+                        <td id="07"></td>
+                        <td id="08"></td>
+                        <td id="09"></td>
+                    </tr>
+                    <tr>
+                        <td id="10"></td>
+                        <td id="11"></td>
+                        <td id="12"></td>
+                        <td id="13"></td>
+                        <td id="14"></td>
+                        <td id="15"></td>
+                        <td id="16"></td>
+                        <td id="17"></td>
+                        <td id="18"></td>
+                        <td id="19"></td>
+                    </tr>
+                    <tr>
+                        <td id="20"></td>
+                        <td id="21"></td>
+                        <td id="22"></td>
+                        <td id="23"></td>
+                        <td id="24"></td>
+                        <td id="25"></td>
+                        <td id="26"></td>
+                        <td id="27"></td>
+                        <td id="28"></td>
+                        <td id="29"></td>
+                    </tr>
+                    <tr>
+                        <td id="30"></td>
+                        <td id="31"></td>
+                        <td id="32"></td>
+                        <td id="33"></td>
+                        <td id="34"></td>
+                        <td id="35"></td>
+                        <td id="36"></td>
+                        <td id="37"></td>
+                        <td id="38"></td>
+                        <td id="39"></td>
+                    </tr>
+                    <tr>
+                        <td id="40"></td>
+                        <td id="41"></td>
+                        <td id="42"></td>
+                        <td id="43"></td>
+                        <td id="44"></td>
+                        <td id="45"></td>
+                        <td id="46"></td>
+                        <td id="47"></td>
+                        <td id="48"></td>
+                        <td id="49"></td>
+                    </tr>
+                    <tr>
+                        <td id="50"></td>
+                        <td id="51"></td>
+                        <td id="52"></td>
+                        <td id="53"></td>
+                        <td id="54"></td>
+                        <td id="55"></td>
+                        <td id="56"></td>
+                        <td id="57"></td>
+                        <td id="58"></td>
+                        <td id="59"></td>
+                    </tr>
+                    <tr>
+                        <td id="60"></td>
+                        <td id="61"></td>
+                        <td id="62"></td>
+                        <td id="63"></td>
+                        <td id="64"></td>
+                        <td id="65"></td>
+                        <td id="66"></td>
+                        <td id="67"></td>
+                        <td id="68"></td>
+                        <td id="69"></td>
+                    </tr>
+                    <tr>
+                        <td id="70"></td>
+                        <td id="71"></td>
+                        <td id="72"></td>
+                        <td id="73"></td>
+                        <td id="74"></td>
+                        <td id="75"></td>
+                        <td id="76"></td>
+                        <td id="77"></td>
+                        <td id="78"></td>
+                        <td id="79"></td>
+                    </tr>
+                    <tr>
+                        <td id="80"></td>
+                        <td id="81"></td>
+                        <td id="82"></td>
+                        <td id="83"></td>
+                        <td id="84"></td>
+                        <td id="85"></td>
+                        <td id="86"></td>
+                        <td id="87"></td>
+                        <td id="88"></td>
+                        <td id="89"></td>
+                    </tr>
+                    <tr>
+                        <td id="90"></td>
+                        <td id="91"></td>
+                        <td id="92"></td>
+                        <td id="93"></td>
+                        <td id="94"></td>
+                        <td id="95"></td>
+                        <td id="96"></td>
+                        <td id="97"></td>
+                        <td id="98"></td>
+                        <td id="99"></td>
+                    </tr>
+                    <tr>
+                        <td id="100"></td>
+                        <td id="101"></td>
+                        <td id="102"></td>
+                        <td id="103"></td>
+                        <td id="104"></td>
+                        <td id="105"></td>
+                        <td id="106"></td>
+                        <td id="107"></td>
+                        <td id="108"></td>
+                        <td id="109"></td>
+                    </tr>
+                    <tr>
+                        <td id="110"></td>
+                        <td id="111"></td>
+                        <td id="112"></td>
+                        <td id="113"></td>
+                        <td id="114"></td>
+                        <td id="115"></td>
+                        <td id="116"></td>
+                        <td id="117"></td>
+                        <td id="118"></td>
+                        <td id="119"></td>
+                    </tr>
+                    <tr>
+                        <td id="120"></td>
+                        <td id="121"></td>
+                        <td id="122"></td>
+                        <td id="123"></td>
+                        <td id="124"></td>
+                        <td id="125"></td>
+                        <td id="126"></td>
+                        <td id="127"></td>
+                        <td id="128"></td>
+                        <td id="129"></td>
+                    </tr>
+                    <tr>
+                        <td id="130"></td>
+                        <td id="131"></td>
+                        <td id="132"></td>
+                        <td id="133"></td>
+                        <td id="134"></td>
+                        <td id="135"></td>
+                        <td id="136"></td>
+                        <td id="137"></td>
+                        <td id="138"></td>
+                        <td id="139"></td>
+                    </tr>
+                    <tr>
+                        <td id="140"></td>
+                        <td id="141"></td>
+                        <td id="142"></td>
+                        <td id="143"></td>
+                        <td id="144"></td>
+                        <td id="145"></td>
+                        <td id="146"></td>
+                        <td id="147"></td>
+                        <td id="148"></td>
+                        <td id="149"></td>
+                    </tr>
+                    <tr>
+                        <td id="150"></td>
+                        <td id="151"></td>
+                        <td id="152"></td>
+                        <td id="153"></td>
+                        <td id="154"></td>
+                        <td id="155"></td>
+                        <td id="156"></td>
+                        <td id="157"></td>
+                        <td id="158"></td>
+                        <td id="159"></td>
+                    </tr>
+                    <tr>
+                        <td id="160"></td>
+                        <td id="161"></td>
+                        <td id="162"></td>
+                        <td id="163"></td>
+                        <td id="164"></td>
+                        <td id="165"></td>
+                        <td id="166"></td>
+                        <td id="167"></td>
+                        <td id="168"></td>
+                        <td id="169"></td>
+                    </tr>
+                    <tr>
+                        <td id="170"></td>
+                        <td id="171"></td>
+                        <td id="172"></td>
+                        <td id="173"></td>
+                        <td id="174"></td>
+                        <td id="175"></td>
+                        <td id="176"></td>
+                        <td id="177"></td>
+                        <td id="178"></td>
+                        <td id="179"></td>
+                    </tr>
+                    <tr>
+                        <td id="180"></td>
+                        <td id="181"></td>
+                        <td id="182"></td>
+                        <td id="183"></td>
+                        <td id="184"></td>
+                        <td id="185"></td>
+                        <td id="186"></td>
+                        <td id="187"></td>
+                        <td id="188"></td>
+                        <td id="189"></td>
+                    </tr>
+                    <tr>
+                        <td id="190"></td>
+                        <td id="191"></td>
+                        <td id="192"></td>
+                        <td id="193"></td>
+                        <td id="194"></td>
+                        <td id="195"></td>
+                        <td id="196"></td>
+                        <td id="197"></td>
+                        <td id="198"></td>
+                        <td id="199"></td>
+                    </tr>
+                </table>
+                <div id="start-menu">
+                    <p>JSTETRIS</p>
+                    <p id= highscore>HIGHSCORE: 0</p>
+                    <label for="level">CHOOSE YOUR STARTING LEVEL</label><br>
+                    <select id="level">
+                        <option value="0" selected>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select><br>
+                    <button id="start-game" onclick="startGame()"><strong>START GAME</strong></button>
+                    <p style="font-size: 0.75vmax">Made by Jani Seppälä</p>
+                </div>
+                <div id="game-over-menu">
+                    <p>GAME OVER!</p>
+                    <p id="your-score">Your score: 00000</p>
+                    <p id="new-highscore">NEW HIGHSCORE!</p><br>
+                    <button id="return-to-main-menu" onclick="mainMenu()"><strong>RETURN TO MAIN MENU</strong></button>
+                </div>
+            </div>
+            <div class="grid-item" id="next">NEXT
+                <table id="next-tetromino">
+                    <tr>
+                        <td id="n00"></td>
+                        <td id="n01"></td>
+                        <td id="n02"></td>
+                        <td id="n03"></td>
+                    </tr>
+                    <tr>
+                        <td id="n10"></td>
+                        <td id="n11"></td>
+                        <td id="n12"></td>
+                        <td id="n13"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="grid-item" id="stats">SCORE:<br>0<br>LEVEL: 0<br>LINES: 0</div>
+            <button class="grid-item" id="button-left" onclick="moveTetromino(-1,0)"><strong>LEFT</strong></button>
+            <button class="grid-item" id="button-right" onclick="moveTetromino(1,0)"><strong>RIGHT</strong></button>
+            <button class="grid-item" id="button-drop" onmousedown="enableSoftDrop(true)" onmouseup="enableSoftDrop(false)" ontouchstart="enableSoftDrop(true)" ontouchend="enableSoftDrop(false)"><strong>DROP</strong></button>
+            <button class="grid-item" id="button-rotate" onclick="rotateTetromino()"><strong>ROTATE</strong></button>
+        </div>
+        <script src="tetris.js"></script>
+    </body>
+</html>
