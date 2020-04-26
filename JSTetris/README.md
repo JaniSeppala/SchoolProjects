@@ -7,4 +7,4 @@ Play it online here: [Click me!](http://homes.jamk.fi/~m3063/jsTetris/)
 ## Main features:
 - Play Tetris on your browser
 - Play with arrow keys or by using the on-screen buttons
-- Resposive layout that supports playing in horizontal and vertical modes in (almost) any aspect ratio
+- Responsive layout that supports playing in horizontal and vertical mode in (almost) any aspect ratio
