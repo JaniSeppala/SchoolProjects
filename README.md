@@ -9,6 +9,11 @@ A collection of school projects I have done while studying Business Information 
 - HTML
 - SQL Database
 
+### JSTetris
+- Javascript
+- HTML
+- CSS
+
 ### Optitree
 - JavaScript
 - TypeScript
@@ -23,3 +28,9 @@ A collection of school projects I have done while studying Business Information 
 - C#
 - Unity
 - Blender
+---
+## Other projects
+Below are other projects that I have made or was involved in.
+
+### Notris
+Notris is a Tetris game I made with the Construct 3 Game Making Software for the Game Development with Graphical Editor course. [Click here to play it online](http://homes.jamk.fi/~m3063/construct/) or [click here to download the Android app](http://homes.jamk.fi/~m3063/construct/Notris.android.debug.apk).
